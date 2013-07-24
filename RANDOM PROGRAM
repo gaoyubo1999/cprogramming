@@ -1,0 +1,58 @@
+void drawingBall( int[] x, int[] y){
+  setColor(blue);
+	for( int i=0; i<2; i=i+1){
+
+		drawString("RON STINKS.", true, false, 40, x[0], y[0]);
+	}
+
+	return;
+}
+
+void clearBall( int[] x, int[] y){
+	setColor(white);
+	fillRectangle(1,1,getDrawingWidth(),getDrawingHeight());
+
+	return;
+}
+
+void updateLocation(int[] x, int[] y, int[] dir)
+{
+	for (int i=0;i<2;i++){
+		x[i] = x[i]+dir[i];
+	
+	}
+
+}
+
+void checkBound(int[] x, int[] y, int[] dir)
+{
+	for (int i=0;i<2;i++){
+		if (x[i]<0 || x[i]>(getDrawingWidth()-300)) {dir[i] = dir[i] * (-1);}
+		if (y[i]<0 || y[i]>(getDrawingHeight()-25)) {dir[i] = dir[i] * (-1);}
+	}
+}
+
+void main()
+{
+	int[] xL = new int[2];
+	int[] yL = new int[2];
+	int[] dir = new int[2];
+
+	int width = getDrawingWidth();
+	int height = getDrawingHeight();
+
+	for( int i=0; i<2; i=i+1){
+		xL[i] = 1;
+		yL[i] = 300;
+		dir[i] = 10;
+	}
+
+	while (true)
+	{
+		drawingBall(xL, yL);
+		delay(0.05);
+		clearBall(xL, yL);
+		updateLocation(xL, yL, dir);
+		checkBound(xL, yL, dir);
+	}
+}
